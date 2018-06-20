@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="LaunchHoloAppSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LaunchHoloAppSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <TextBlock x:Name="AppTitle"
+                   xmlns:appmodel="using:Windows.ApplicationModel"
+                   Text="{x:Bind appmodel:Package.Current.DisplayName}"
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                   IsHitTestVisible="False"
+                   Margin="5"
+                   Canvas.ZIndex="1" />
+
+        <NavigationView Header="Launch remote HoloLens app"
+                        ItemInvoked="NavigationView_ItemInvoked"
+                        IsSettingsVisible="False"
+                        Canvas.ZIndex="0">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Manage HoloLens"
+                                    Tag="ManageHoloLensPage">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="Manage" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Apps"
+                                    Tag="ManageAppsPage">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="AllApps" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Running processes"
+                                    Tag="RunningProcessesInfoPage">
+                    <NavigationViewItem.Icon>
+                        <SymbolIcon Symbol="TwoPage" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="frame">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition />
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+                <local:TopPage />
+            </Frame>
+        </NavigationView>
+    </Grid>
+</Page>
